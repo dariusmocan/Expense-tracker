@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+    <style>
+        
+
+        .informations{
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%;
+        }
+
+        .expenses{
+            border-collapse: collapse;
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%;
+        }
+
+        .expenses th,
+        .expenses td {
+            border: 1px solid black; /* Add borders to table cells */
+            padding: 8px; /* Add padding for better appearance */
+            text-align: left; /* Align text to the left */
+        }
+
+        .expenses tr:nth-child(even) {
+            background-color: #e9e9e9; /* Background color for even rows */
+        }
+
+    </style>
+</head>
+
+
+<body>
+    <h1 style="text-align: center;">Expense Tracker</h1>
+    <h2 style="text-align: center;">Add an item:</h2>
+    <table class="informations">
+        <tr>
+            <td style="text-align: left;">
+                <label for="namebox">Name:</label>
+                <input type="text" id="namebox" placeholder="Where was the expense made?" style="width: 93%;">
+            </td>
+        </tr>
+
+        <tr>
+            <td style="text-align: left;">
+                <!--
+                <label for="datebox">Date:</label>
+                <input type="text" id="databox" placeholder="dd/mm/yy" style="width: 43.35%;">
+                -->
+                <label for="amountbox">Amount:</label>
+                <input type="text" id="amountbox" style="width: 92%;">
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 100%; text-align: center;">
+                <input type="button" onclick="getDetails()" id="expense" value="Add expense">
+            </td> 
+        </tr>
+        
+    </table>
+
+</body>
+</html>
