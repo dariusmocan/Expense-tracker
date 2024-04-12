@@ -1,3 +1,9 @@
+<?php 
+include 'ConnectTracker.php';
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -64,7 +70,6 @@
         
     </table>
 
-
     <table id="expenses" class="expenses">
         <tr>
             <th>Name</th>
@@ -72,9 +77,21 @@
             <th>Amount</th>
             <th></th>
         </tr>
+        <?php
+            foreach ($expenses as $expense){
+                echo "<tr>";
+                echo "<td>" . $expense['name'] . "</td>";
+                echo "<td>" . $expense['data'] . "</td>";
+                echo "<td>" . $expense['amount'] . " ron</td>";
+                echo "<td><button onclick='removeExpense(" . $expense['id'] . ")'>X</button></td>";
+                echo "</tr>";
+            }
+        ?>
 
         <script src="scripTracker.js"></script>
     </table>
+
+
 
 </body>
 </html>
