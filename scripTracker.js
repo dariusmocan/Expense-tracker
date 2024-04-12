@@ -1,20 +1,3 @@
-/*
-const mysql = require('mysql');
-
-const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'expensetracker'
-  });
-
-connection.connect((err) => {
-    if(err) throw err;
-    console.log('Connected to database');
-})*/
-
-
-
 
 function containsOnlyInt(text){
     var intPattern = /^\d+$/;
@@ -87,5 +70,17 @@ function getDetails(){
 
     table.appendChild(newRow);
 
+
+    // AJAX
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "ConnectTracker.php", true);
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+            alert(xhr.responseText);
+        }
+    };
+    var data = "name=" + encodeURIComponent(name) + "&amount=" + encodeURIComponent(amount);
+    xhr.send(data);
 
 }
