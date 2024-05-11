@@ -51,25 +51,23 @@ function getDetails(){
 
     var buton = document.createElement("button");
 
-    
-    buton.style.width="100%";
-    buton.style.height="100%";
-    buton.style.padding="0";
-    buton.style.margin="0";
-    buton.style.textAlign="center";
-    buton.style.display = "flex";
-    buton.style.alignItems = "center";
-    buton.style.justifyContent = "center";
-
     buton.textContent = "X";
-    buton.addEventListener("click", function(){
-        var row = this.parentNode;
-        row.parentNode.removeChild(row);
-    })
+    
     newRow.appendChild(buton);
 
-    table.appendChild(newRow);
+    buton.addEventListener("click", function(){
+        var expenseId = this.parentNode.id;
+    console.log("Expense ID:", expenseId);
+    removeExpenseDirrectly(expenseId);
+    });
 
+    var totalExpensesRow = document.getElementById('totalExpenses');
+
+    //table.insertBefore(newRow, totalExpensesRow);
+
+    //table.appendChild(newRow);
+
+    updateTotalExpenses();
 
     // AJAX
     var xhr = new XMLHttpRequest();
@@ -83,4 +81,57 @@ function getDetails(){
     var data = "name=" + encodeURIComponent(name) + "&amount=" + encodeURIComponent(amount);
     xhr.send(data);
 
+    setTimeout(function(){
+        location.reload();
+    }, 300)
+
 }
+
+function removeExpense(expense_id){
+    var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'deleteExpense.php', true);
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                // If the request is successful, remove the expense row from the table
+                var row = document.getElementById('expense_' + expense_id);
+                row.parentNode.removeChild(row);
+            }
+        };
+        xhr.send('expense_id=' + expense_id);
+
+        updateTotalExpenses();
+}
+
+
+/*function removeExpenseDirrectly(expenseId) {
+    var row = document.getElementById('expense_' + expenseId);
+    if (row) {
+        row.remove(); // Remove the row directly
+        updateTotalExpenses(); // Update total expenses after removal
+        // Optionally, you can also make an AJAX call to delete the expense from the server
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'deleteExpense.php', true);
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                console.log(xhr.responseText); // Log server response
+            }
+        };
+        xhr.send('expense_id=' + expenseId);
+    }
+}*/
+
+
+function updateTotalExpenses() {
+    var totalAmount = 0;
+    var expenseRows = document.querySelectorAll('.expenses tr:not(#totalExpenses)');
+    expenseRows.forEach(function(row) {
+        // Extract the numeric part of the string and add it to the total amount
+        var amountText = row.cells[2].textContent;
+        var amountValue = parseFloat(amountText.substring(0, amountText.length - 4)); // Remove " ron" from the end
+        totalAmount += amountValue;
+    });
+    document.getElementById('totalAmount').textContent = "Total Expenses: " + totalAmount.toFixed(2) + " ron";
+}
+
