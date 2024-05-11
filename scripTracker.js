@@ -67,7 +67,7 @@ function getDetails(){
 
     //table.appendChild(newRow);
 
-    updateTotalExpenses();
+    //updateTotalExpenses();
 
     // AJAX
     var xhr = new XMLHttpRequest();
@@ -100,7 +100,13 @@ function removeExpense(expense_id){
         };
         xhr.send('expense_id=' + expense_id);
 
-        updateTotalExpenses();
+        alert("Expense deleted succsesfully!");
+
+        setTimeout(function(){
+            location.reload();
+        }, 300)
+
+        //updateTotalExpenses();
 }
 
 
@@ -123,7 +129,7 @@ function removeExpense(expense_id){
 }*/
 
 
-function updateTotalExpenses() {
+/*function updateTotalExpenses() {
     var totalAmount = 0;
     var expenseRows = document.querySelectorAll('.expenses tr:not(#totalExpenses)');
     expenseRows.forEach(function(row) {
@@ -133,5 +139,5 @@ function updateTotalExpenses() {
         totalAmount += amountValue;
     });
     document.getElementById('totalAmount').textContent = "Total Expenses: " + totalAmount.toFixed(2) + " ron";
-}
+}*/
 
