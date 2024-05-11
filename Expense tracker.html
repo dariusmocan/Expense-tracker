@@ -1,5 +1,6 @@
 <?php 
 include 'ConnectTracker.php';
+
 ?>
 
 
@@ -79,7 +80,7 @@ include 'ConnectTracker.php';
         </tr>
         <?php
             foreach ($expenses as $expense){
-                echo "<tr>";
+                echo "<tr id='expense_" . $expense['id'] . "'>";
                 echo "<td>" . $expense['name'] . "</td>";
                 echo "<td>" . $expense['data'] . "</td>";
                 echo "<td>" . $expense['amount'] . " ron</td>";
@@ -87,6 +88,10 @@ include 'ConnectTracker.php';
                 echo "</tr>";
             }
         ?>
+        <tr id="totalExpenses">
+            <td>Total Expenses: </td>
+            <td colspan="3" id="totalAmount"></td>
+        </tr>
 
         <script src="scripTracker.js"></script>
     </table>
