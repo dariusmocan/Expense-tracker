@@ -1,6 +1,10 @@
 <?php 
 include 'ConnectTracker.php';
 
+$totalExpenses = 0;
+foreach ($expenses as $expense) {
+    $totalExpenses += $expense['amount'];
+}
 ?>
 
 
@@ -90,7 +94,7 @@ include 'ConnectTracker.php';
         ?>
         <tr id="totalExpenses">
             <td>Total Expenses: </td>
-            <td colspan="3" id="totalAmount"></td>
+            <td colspan="3" id="totalAmount" style="text-align: center; font-weight: bold;"><?php echo $totalExpenses; ?> Ron </td>
         </tr>
 
         <script src="scripTracker.js"></script>
